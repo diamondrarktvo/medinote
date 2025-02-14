@@ -128,10 +128,14 @@
 │   ├── 📄 package.json   # Dépendances backend
 │   └── 📄 .env           # Variables d’environnement
 ├── 📂 frontend
-│   ├── 📁 src
-│   │   ├── 📁 components # Composants réutilisables
-│   │   ├── 📁 screens    # Écrans principaux
-│   │   ├── 📁 redux      # Store global Redux Toolkit
+│   ├── 📁 app
+│   │   ├── 📁 features # fonctionnalités principales (écrans)
+│   │   ├── 📁 shared    # dossiers contenant des composants, services, styles, ... reutilisables
+│   │   ├── 📁 navigations      # navigations dans l'application
+│   │   ├── 📁 theme      # theme de l'application
+│   │   ├── 📁 store      # contenant les configurations de base redux-toolkit
+│   │   ├── 📁 navigations      # navigations dans l'application
+│   │   ├── 📁 config      # config de l'application
 │   │   └── 📄 App.js     # Point d’entrée de l’app mobile
 │   ├── 📄 package.json   # Dépendances frontend
 │   └── 📄 app.json       # Configuration Expo
