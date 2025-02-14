@@ -183,9 +183,8 @@ Merci pour votre aide ! 🚀
 
 Pour toute question ou suggestion, ouvrez une issue sur **GitHub** ou contactez :  
 
-📩 **Email** : [votre-email@example.com](mailto:votre-email@example.com)  
+📩 **Email** : [diamondrap20.aps1b@gmail.com](mailto:diamondrap20.aps1b@gmail.com)  
 
 ---
 
 💙 **Merci d’utiliser et de contribuer à ce projet !**  
-🚀 Profitez-en pour explorer la communication mobile-backend, la gestion de fichiers sensibles et l’IA dans un contexte médical sécurisé.
