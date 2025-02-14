@@ -134,7 +134,6 @@
 │   │   ├── 📁 navigations      # navigations dans l'application
 │   │   ├── 📁 theme      # theme de l'application
 │   │   ├── 📁 store      # contenant les configurations de base redux-toolkit
-│   │   ├── 📁 navigations      # navigations dans l'application
 │   │   ├── 📁 config      # config de l'application
 │   │   └── 📄 App.js     # Point d’entrée de l’app mobile
 │   ├── 📄 package.json   # Dépendances frontend
