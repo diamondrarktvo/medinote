@@ -1,0 +1,22 @@
+//prettier-ignore
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "strict": true,
+     "baseUrl": ".",
+     "paths": {
+       "_shared": ["src/shared"],
+       "_config": ["src/config"],
+       "_images": ["src/assets/images"],
+       "_features": ["src/features"],
+       "_theme": ["src/theme"],
+       "_utils": ["src/utils"],
+       "_hooks": ["src/hooks"],
+       "_services": ["src/services"],
+       "_i18n": ["src/i18n"],
+       "_store": ["src/store"],
+       "_navigations": ["src/navigations"]
+     }
+  }
+}

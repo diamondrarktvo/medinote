@@ -1,0 +1,1 @@
+export { useGetTheme } from "./useGetTheme";

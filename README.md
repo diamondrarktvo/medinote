@@ -127,7 +127,7 @@
 │   ├── 📄 package.json   # Dépendances backend
 │   └── 📄 .env           # Variables d’environnement
 ├── 📂 frontend
-│   ├── 📁 app
+│   ├── 📁 src
 │   │   ├── 📁 features # fonctionnalités principales (écrans)
 │   │   ├── 📁 shared    # dossiers contenant des composants, services, styles, ... reutilisables
 │   │   ├── 📁 navigations      # navigations dans l'application
