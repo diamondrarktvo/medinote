@@ -156,10 +156,9 @@ Le fichier de workflow est dans `.github/workflows/ci.yml`.
 
 ## 📈 Améliorations Futures
 
-✨ **Ajout d’un moteur de transcription réel** (ex: OpenAI Whisper).  
 ✨ **Renforcement du chiffrement et de la sécurité des fichiers**.  
 ✨ **Tests unitaires et intégration pour le back-end & front-end**.  
-✨ **Déploiement en production avec infrastructure sécurisée**.  
+✨ **Déploiement en production**.  
 
 ---
 
