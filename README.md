@@ -173,12 +173,6 @@ Merci pour votre aide ! 🚀
 
 ---
 
-## 📜 Licence
-
-📝 Ce projet est sous licence **MIT**. Consultez le fichier **LICENSE** pour plus de détails.
-
----
-
 ## 📧 Contact
 
 Pour toute question ou suggestion, ouvrez une issue sur **GitHub** ou contactez :  
