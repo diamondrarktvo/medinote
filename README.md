@@ -17,7 +17,6 @@
 - [🚀 CI/CD](#-cicd)
 - [📈 Améliorations Futures](#-améliorations-futures)
 - [🤝 Contribuer](#-contribuer)
-- [📜 Licence](#-licence)
 - [📧 Contact](#-contact)
 
 ---
