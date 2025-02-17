@@ -15,6 +15,7 @@ import RequestError from "./components/RequestError";
 import RequestLoader from "./components/RequestLoader";
 import Spacer from "./components/Spacer";
 import Header from "./components/Header";
+import BottomSheet from "./components/BottomSheet";
 
 export {
   Icon,
@@ -33,6 +34,7 @@ export {
   RequestLoader,
   Header,
   Spacer,
+  BottomSheet,
 };
 
 export { STYLES } from "./style";

@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.1.1",
     "@react-native-community/netinfo": "11.4.1",
     "@react-native-masked-view/masked-view": "0.3.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
@@ -26,6 +27,8 @@
     "expo-splash-screen": "~0.29.22",
     "expo-status-bar": "~2.0.1",
     "expo-system-ui": "~4.0.8",
+    "i18next": "^24.2.2",
+    "intl-pluralrules": "^2.0.1",
     "lottie-react-native": "7.1.0",
     "moment": "^2.30.1",
     "react": "18.3.1",

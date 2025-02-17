@@ -2,7 +2,8 @@ import { PixelRatio, Platform, StatusBar, TextStyle } from "react-native";
 import moment from "moment";
 import { isIphoneX } from "react-native-iphone-x-helper";
 import Toast from "react-native-toast-message";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
+import { SCREEN_HEIGHT, SCREEN_WIDTH, SUPPORTED_LANGUAGES } from "./constants";
+import { LanguageSupportedT } from "./Types";
 /**
  *
  * @param inputDate
@@ -164,6 +165,10 @@ const changeColorStyleFromRNTypo = (style: TextStyle): TextStyle => {
   return { ...style, color: "black" };
 };
 
+const isLanguageSupported = (lang: LanguageSupportedT) => {
+  return SUPPORTED_LANGUAGES.includes(lang);
+};
+
 export const Layouts = {
   widthPercentageToDP,
   heightPercentageToDP,
@@ -184,4 +189,5 @@ export const DateUtils = {
 export const Helpers = {
   showToast,
   changeColorStyleFromRNTypo,
+  isLanguageSupported,
 };

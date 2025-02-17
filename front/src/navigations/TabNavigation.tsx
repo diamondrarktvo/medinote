@@ -8,29 +8,34 @@ import { ThemeT } from "_theme";
 import { RecordingScreen, SettingScreen } from "_features";
 import { Icon, Text } from "_shared";
 import { Layouts } from "_utils";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
-//routes
-const TABROUTES: TabRouteTypes[] = [
-  {
-    name: "voice_analysis_screen",
-    component: RecordingScreen,
-    tabLabel: "Recording",
-    icon: "record-voice-over",
-  },
-  {
-    name: "setting_screen",
-    component: SettingScreen,
-    tabLabel: "Paramètre",
-    icon: "settings",
-  },
-];
-
 const TabNavigation = () => {
+  const { t } = useTranslation("common");
   const theme = useTheme<ThemeT>();
-  const { primary, mainForeground, mainBackground, black, transparent } =
-    theme.colors;
+  const { primary, mainForeground, black } = theme.colors;
+
+  //routes
+  const TABROUTES: TabRouteTypes[] = useMemo(() => {
+    return [
+      {
+        name: "voice_analysis_screen",
+        component: RecordingScreen,
+        tabLabel: t("tab_navigation.label.recording"),
+        icon: "record-voice-over",
+      },
+      {
+        name: "setting_screen",
+        component: SettingScreen,
+        tabLabel: t("tab_navigation.label.setting"),
+        icon: "settings",
+      },
+    ];
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="voice_analysis_screen"
