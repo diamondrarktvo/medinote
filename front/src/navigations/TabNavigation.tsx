@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabParamList, TabRouteTypes } from "./types";
 import { useTheme } from "@shopify/restyle";
 import { ThemeT } from "_theme";
-import { VoiceAnalysisScreen, SettingScreen } from "_features";
+import { RecordingScreen, SettingScreen } from "_features";
 import { Icon } from "_shared";
 import { Layouts } from "_utils";
 
@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 const TABROUTES: TabRouteTypes[] = [
   {
     name: "voice_analysis_screen",
-    component: VoiceAnalysisScreen,
+    component: RecordingScreen,
     tabLabel: "Accueil",
     icon: "home",
   },

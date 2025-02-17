@@ -1,3 +1,3 @@
 //SCREEN PRINCIPAL
 export { SettingScreen } from "./setting";
-export { VoiceAnalysisScreen } from "./voice-analysis";
+export { RecordingScreen } from "./recordings";

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Scaffold, Text, Box } from "_shared";
 import { Size, ThemeT } from "_theme";
 
-export default function VoiceAnalysisScreen() {
+export default function RecordingScreen() {
   const theme = useTheme<ThemeT>();
   const { colors, sizes } = theme;
 
