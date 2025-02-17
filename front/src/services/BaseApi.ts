@@ -9,6 +9,6 @@ export const BaseApi = createApi({
   refetchOnReconnect: true,
   refetchOnFocus: true,
   refetchOnMountOrArgChange: true,
-  tagTypes: ["weather"],
+  tagTypes: ["Recording"],
   endpoints: () => ({}),
 });
