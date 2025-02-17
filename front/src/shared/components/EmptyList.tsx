@@ -2,6 +2,7 @@ import AnimatedLottieView from "lottie-react-native";
 import Box from "./Box";
 import { StyleSheet } from "react-native";
 import Text from "./Text";
+import { EmptyListImage } from "_assets";
 
 type Props = {
   textToShow: string;
@@ -16,12 +17,14 @@ const EmptyList = ({ textToShow }: Props) => {
       justifyContent={"center"}
     >
       <AnimatedLottieView
-        source={require("_assets/images/empty.json")}
+        source={EmptyListImage}
         autoPlay
         loop
         style={styles.lottieImg}
       />
-      <Text variant={"primary"} textAlign={"center"}>{textToShow}</Text>
+      <Text variant={"primary"} textAlign={"center"}>
+        {textToShow}
+      </Text>
     </Box>
   );
 };

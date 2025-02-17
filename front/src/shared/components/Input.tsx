@@ -58,7 +58,7 @@ const Input = ({
         {label ? (
           <Text
             variant={"primary"}
-            color="primaryDark"
+            color="primary"
             fontWeight={boldLabel ? "bold" : "normal"}
           >
             {label}
@@ -66,7 +66,7 @@ const Input = ({
         ) : null}
         <Row
           borderRadius="md"
-          backgroundColor="input"
+          backgroundColor="offWhite"
           width="100%"
           paddingVertical="s"
           paddingHorizontal="s"

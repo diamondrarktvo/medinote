@@ -7,8 +7,8 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
 import Text from "./Text";
-import { heightPercentageToDP, widthPercentageToDP } from "_utils";
-import { useGetTheme } from "_theme";
+import { useGetTheme } from "_hooks";
+import { Layouts } from "_utils";
 
 type Props = {
   isOverlay?: boolean;
@@ -35,13 +35,13 @@ const RequestLoader: React.FC<Props> = ({
         animationType="fade"
       >
         <Box
-          backgroundColor={"overlayDarkBg"}
+          backgroundColor={"overlayBackground"}
           paddingVertical={"m"}
           flexDirection={"column"}
           justifyContent={"space-evenly"}
           alignItems={"center"}
-          height={heightPercentageToDP(25)}
-          width={widthPercentageToDP(60)}
+          height={Layouts.RFValue(50)}
+          width={Layouts.RFValue(60)}
           borderRadius={"lg"}
         >
           <ActivityIndicator size="large" color={colors.primary} />
@@ -66,13 +66,13 @@ const RequestLoader: React.FC<Props> = ({
           zIndex={1}
         >
           <Box
-            backgroundColor={"withoutOverlayDarkBg"}
+            backgroundColor={"overlayBackground"}
             paddingVertical={"m"}
             flexDirection={"column"}
             justifyContent={"space-evenly"}
             alignItems={"center"}
-            height={heightPercentageToDP(25)}
-            width={widthPercentageToDP(60)}
+            height={Layouts.RFValue(50)}
+            width={Layouts.RFValue(60)}
             borderRadius={"lg"}
           >
             <ActivityIndicator size="large" color={colors.primary} />

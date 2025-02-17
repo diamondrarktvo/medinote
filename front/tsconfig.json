@@ -8,7 +8,7 @@
      "paths": {
        "_shared": ["src/shared"],
        "_config": ["src/config"],
-       "_images": ["src/assets/images"],
+       "_assets": ["src/assets"],
        "_features": ["src/features"],
        "_theme": ["src/theme"],
        "_utils": ["src/utils"],

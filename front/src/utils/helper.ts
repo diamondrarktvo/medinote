@@ -1,9 +1,8 @@
-import { PixelRatio, Platform, StatusBar } from "react-native";
+import { PixelRatio, Platform, StatusBar, TextStyle } from "react-native";
 import moment from "moment";
 import { isIphoneX } from "react-native-iphone-x-helper";
 import Toast from "react-native-toast-message";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
-
 /**
  *
  * @param inputDate
@@ -161,6 +160,10 @@ const isTablet = () => {
   return smallestDimension >= 600;
 };
 
+const changeColorStyleFromRNTypo = (style: TextStyle): TextStyle => {
+  return { ...style, color: "black" };
+};
+
 export const Layouts = {
   widthPercentageToDP,
   heightPercentageToDP,
@@ -180,4 +183,5 @@ export const DateUtils = {
 
 export const Helpers = {
   showToast,
+  changeColorStyleFromRNTypo,
 };

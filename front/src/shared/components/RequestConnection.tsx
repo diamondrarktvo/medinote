@@ -4,6 +4,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import Text from "./Text";
 import NetInfo from "@react-native-community/netinfo";
 import AnimatedLottieView from "lottie-react-native";
+import { ConnectionLost } from "_assets";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ const RequestConnection: React.FC<Props> = ({ children, ...props }) => {
       {!isConnected || !isUserHasAccessToInternet ? (
         <Box flex={1} justifyContent={"center"} alignItems={"center"}>
           <AnimatedLottieView
-            source={require("_assets/images/lostconnection.json")}
+            source={ConnectionLost}
             autoPlay
             loop
             style={styles.lottieImg}

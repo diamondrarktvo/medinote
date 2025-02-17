@@ -10,6 +10,7 @@ const palette = {
   primaryBlue: "#4A90E2",
   secondaryBlue: "#8FC1F3",
   errorRed: "#D0021B",
+  overlayBackground: "rgba(0, 0, 0, 0.65)",
 
   // Couleurs pour le thème sombre
   darkBackground: "#121212",
@@ -17,6 +18,9 @@ const palette = {
   darkPrimary: "#4A90E2",
   darkSecondary: "#356AC3",
   darkError: "#FF4C4C",
+  darkOverlayBackground: "rgba(255, 255, 255, 0.65)",
+
+  transparent: "transparent",
 };
 
 const theme = createTheme({
@@ -35,6 +39,8 @@ const theme = createTheme({
     cardLightBackground: palette.lightGrey,
     text: palette.darkGrey,
     textPrimaryColor: palette.primaryBlue,
+    overlayBackground: palette.overlayBackground,
+    transparent: palette.transparent,
   },
   spacing: {
     none: 0,
@@ -113,6 +119,7 @@ const darkTheme = createTheme({
     white: palette.darkForeground,
     black: palette.darkBackground,
     text: palette.darkForeground,
+    overlayBackground: palette.darkOverlayBackground,
   },
 });
 
