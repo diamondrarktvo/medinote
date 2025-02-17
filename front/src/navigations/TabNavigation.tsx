@@ -6,7 +6,7 @@ import { TabParamList, TabRouteTypes } from "./types";
 import { useTheme } from "@shopify/restyle";
 import { ThemeT } from "_theme";
 import { RecordingScreen, SettingScreen } from "_features";
-import { Icon } from "_shared";
+import { Icon, Text } from "_shared";
 import { Layouts } from "_utils";
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -16,28 +16,32 @@ const TABROUTES: TabRouteTypes[] = [
   {
     name: "voice_analysis_screen",
     component: RecordingScreen,
-    tabLabel: "Accueil",
-    icon: "home",
+    tabLabel: "Recording",
+    icon: "record-voice-over",
   },
   {
     name: "setting_screen",
     component: SettingScreen,
-    tabLabel: "Recherche",
-    icon: "search",
+    tabLabel: "Paramètre",
+    icon: "settings",
   },
 ];
 
 const TabNavigation = () => {
   const theme = useTheme<ThemeT>();
-  const { primary, mainForeground, mainBackground, white } = theme.colors;
+  const { primary, mainForeground, mainBackground, black, transparent } =
+    theme.colors;
   return (
     <Tab.Navigator
       initialRouteName="voice_analysis_screen"
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
-        tabBarShowLabel: false,
-        tabBarStyle: [{ backgroundColor: mainBackground }],
+        tabBarStyle: [
+          {
+            height: Layouts.heightPercentageToDP(7),
+          },
+        ],
       }}
     >
       {TABROUTES.map((route) => (
@@ -49,13 +53,20 @@ const TabNavigation = () => {
             title: route.tabLabel,
             tabBarActiveTintColor: primary,
             tabBarInactiveTintColor: mainForeground,
-            tabBarActiveBackgroundColor: primary,
-            tabBarIcon: ({ focused, color }) => (
+            tabBarIcon: ({ focused }) => (
               <Icon
                 name={route.icon}
-                color={focused ? white : primary}
-                size={focused ? Layouts.RFValue(18) : Layouts.RFValue(16)}
+                color={focused ? primary : black}
+                size={focused ? Layouts.RFValue(20) : Layouts.RFValue(16)}
               />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                variant={focused ? "primaryBold" : "primary"}
+                color={focused ? "primary" : "black"}
+              >
+                {route.tabLabel}
+              </Text>
             ),
           }}
         />
