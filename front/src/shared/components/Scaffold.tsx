@@ -15,7 +15,9 @@ type HeaderProps = {
 const HeaderTabTitle = ({ title }: HeaderProps) => {
   return title ? (
     <Box paddingVertical="m" backgroundColor="mainBackground">
-      <Text variant="headerNavigation">{title}</Text>
+      <Text variant="headerNavigation" color={"primary"}>
+        {title}
+      </Text>
     </Box>
   ) : null;
 };

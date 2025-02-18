@@ -5,7 +5,10 @@ import { human, material } from "react-native-typography";
 export const Typography = {
   headerNavigation: Platform.select({
     ios: { ...Helpers.changeColorStyleFromRNTypo(human.largeTitle) },
-    android: { ...Helpers.changeColorStyleFromRNTypo(material.display4) },
+    android: {
+      ...Helpers.changeColorStyleFromRNTypo(material.display2),
+      fontWeight: "700",
+    },
     default: { ...Helpers.changeColorStyleFromRNTypo(human.largeTitle) },
   }),
   bigTitle: Platform.select({
