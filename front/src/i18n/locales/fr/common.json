@@ -4,5 +4,13 @@
       "recording": "Enregistrement",
       "setting": "Paramètre"
     }
+  },
+  "language": {
+    "français": "Français",
+    "english": "Anglais"
+  },
+  "content": {
+    "empty_menu": "Aucun menu n'est disponible pour le moment.",
+    "app_version": "Version {{versionNumber}}"
   }
 }

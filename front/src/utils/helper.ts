@@ -4,6 +4,7 @@ import { isIphoneX } from "react-native-iphone-x-helper";
 import Toast from "react-native-toast-message";
 import { SCREEN_HEIGHT, SCREEN_WIDTH, SUPPORTED_LANGUAGES } from "./constants";
 import { LanguageSupportedT } from "./Types";
+import packageJson from "../../package.json";
 /**
  *
  * @param inputDate
@@ -169,6 +170,10 @@ const isLanguageSupported = (lang: LanguageSupportedT) => {
   return SUPPORTED_LANGUAGES.includes(lang);
 };
 
+const getAppVersion = () => {
+  return packageJson.version;
+};
+
 export const Layouts = {
   widthPercentageToDP,
   heightPercentageToDP,
@@ -190,4 +195,5 @@ export const Helpers = {
   showToast,
   changeColorStyleFromRNTypo,
   isLanguageSupported,
+  getAppVersion,
 };

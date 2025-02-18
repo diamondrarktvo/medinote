@@ -1,7 +1,9 @@
 {
   "menu": {
-    "label": {
-      "change_language": "Change language"
+    "menu_general": {
+      "title": "General",
+      "item_language": "Language",
+      "item_theme": "Theme"
     }
   }
 }
