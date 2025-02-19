@@ -3,4 +3,4 @@ export { Layouts, DateUtils, Helpers } from "./helper";
 
 export { SCREEN_HEIGHT, SCREEN_WIDTH, SUPPORTED_LANGUAGES } from "./constants";
 
-export { LanguageSupportedT } from "./Types";
+export { LanguageCodeSupportedT, ThemeCodeSupportedT } from "./Types";

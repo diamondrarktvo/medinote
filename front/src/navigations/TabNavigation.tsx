@@ -34,7 +34,7 @@ const TabNavigation = () => {
         icon: "settings",
       },
     ];
-  }, []);
+  }, [t]);
 
   return (
     <Tab.Navigator

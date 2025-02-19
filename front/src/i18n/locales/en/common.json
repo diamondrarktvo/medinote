@@ -6,11 +6,24 @@
     }
   },
   "language": {
+    "label_choice": "Select your language",
     "français": "French",
     "english": "English"
+  },
+  "theme": {
+    "label_choice": "Select your theme",
+    "light": "Light",
+    "dark": "Dark"
   },
   "content": {
     "empty_menu": "No menu available at the moment.",
     "app_version": "Version {{versionNumber}}"
+  },
+  "actions": {
+    "ok": "Ok",
+    "agree": "Agree",
+    "validate": "Validate",
+    "confirm": "Confirm",
+    "choose": "Choose"
   }
 }

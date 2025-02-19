@@ -1,0 +1,31 @@
+{
+  "presets": ["babel-preset-expo"],
+  "env": {
+    "production": {
+      "plugins": ["react-native-paper/babel"]
+    }
+  },
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": [
+          { "_assets": "./src/assets" },
+          { "_config": "./src/config" },
+          { "_features": "./src/features" },
+          { "_hooks": "./src/hooks" },
+          { "_i18n": "./src/i18n" },
+          { "_navigations": "./src/navigations" },
+          { "_services": "./src/services" },
+          { "_shared": "./src/shared" },
+          { "_store": "./src/store" },
+          { "_theme": "./src/theme" },
+          { "_utils": "./src/utils" }
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
+    "react-native-reanimated/plugin"
+  ]
+}

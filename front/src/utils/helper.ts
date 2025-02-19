@@ -3,7 +3,7 @@ import moment from "moment";
 import { isIphoneX } from "react-native-iphone-x-helper";
 import Toast from "react-native-toast-message";
 import { SCREEN_HEIGHT, SCREEN_WIDTH, SUPPORTED_LANGUAGES } from "./constants";
-import { LanguageSupportedT } from "./Types";
+import { LanguageCodeSupportedT } from "./Types";
 import packageJson from "../../package.json";
 /**
  *
@@ -166,7 +166,7 @@ const changeColorStyleFromRNTypo = (style: TextStyle): TextStyle => {
   return { ...style, color: "black" };
 };
 
-const isLanguageSupported = (lang: LanguageSupportedT) => {
+const isLanguageSupported = (lang: LanguageCodeSupportedT) => {
   return SUPPORTED_LANGUAGES.includes(lang);
 };
 

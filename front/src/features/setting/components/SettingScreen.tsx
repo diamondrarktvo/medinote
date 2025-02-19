@@ -1,12 +1,26 @@
 import { Box, Scaffold, Text } from "_shared";
-import { useEffect, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuAndItemsT } from "../SettingTypes";
 import SettingMenuList from "./menu/SettingMenuList";
-import { Helpers } from "_utils";
+import { Helpers, LanguageCodeSupportedT } from "_utils";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { LanguageSheet } from "../../language";
+import { ThemeSheet } from "../../theme";
+import { useAppSelector } from "_store";
+import { selectors as themeSelectors } from "../../theme/themeSlice";
 
 export default function SettingScreen() {
-  const { t } = useTranslation(["common", "setting"]);
+  const {
+    t,
+    i18n: { language: currentLanguage },
+  } = useTranslation(["common", "setting"]);
+
+  const languageRef = useRef<BottomSheetModal>(null);
+  const themeRef = useRef<BottomSheetModal>(null);
+  const currentTheme = useAppSelector(themeSelectors.currentTheme);
+
+  console.log("currentLanguage", currentLanguage);
 
   const ALL_MENUS_AND_ITEMS: MenuAndItemsT[] = useMemo(() => {
     return [
@@ -17,19 +31,29 @@ export default function SettingScreen() {
           {
             id: 1,
             label: t("setting:menu.menu_general.item_language"),
-            action: () => console.log("language"),
-            defaultValue: "Francais",
+            action: () => handleOpenLanguageSheet(),
+            defaultValue: t(
+              `common:language.${currentLanguage as LanguageCodeSupportedT}`,
+            ),
           },
           {
             id: 2,
             label: t("setting:menu.menu_general.item_theme"),
-            action: () => console.log("theme"),
-            defaultValue: "Light",
+            action: () => handleOpenThemeSheet(),
+            defaultValue: t(`common:theme.${currentTheme}`),
           },
         ],
       },
     ];
-  }, [t]);
+  }, [t, languageRef, themeRef, currentLanguage, currentTheme]);
+
+  const handleOpenLanguageSheet = useCallback(() => {
+    languageRef.current?.present();
+  }, [languageRef]);
+
+  const handleOpenThemeSheet = useCallback(() => {
+    themeRef.current?.present();
+  }, [themeRef]);
 
   return (
     <Scaffold
@@ -46,6 +70,9 @@ export default function SettingScreen() {
           </Text>
         </Box>
       </Box>
+
+      <LanguageSheet ref={languageRef} />
+      <ThemeSheet ref={themeRef} />
     </Scaffold>
   );
 }

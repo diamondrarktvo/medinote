@@ -1,1 +1,2 @@
-export type LanguageSupportedT = "fr" | "en";
+export type LanguageCodeSupportedT = "fr" | "en";
+export type ThemeCodeSupportedT = "light" | "dark";

@@ -4,10 +4,8 @@ import {
   BottomSheetBackdrop,
   BottomSheetBackdropProps,
   BottomSheetModal,
+  BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { useResponsiveProp } from "@shopify/restyle";
-import Box from "./Box";
 import { BottomSheetModalProps } from "@gorhom/bottom-sheet";
 import { SharedValue } from "react-native-reanimated";
 import { useGetTheme } from "_hooks";
@@ -17,20 +15,11 @@ export type BottomSheetProps = Omit<BottomSheetModalProps, "snapPoints"> & {
   snapPoints?: (string | number)[] | SharedValue<(string | number)[]>;
 };
 
-const BottomSheet = React.forwardRef<BottomSheetModalMethods, BottomSheetProps>(
+const BottomSheet = React.forwardRef<BottomSheetModal, BottomSheetProps>(
   ({ children, snapPoints, ...rest }, ref) => {
-    const { colors, borderRadii, sizes, spacing } = useGetTheme();
-    const _snapPoints = useMemo(
-      () => snapPoints ?? ["60%", "90%"],
-      [snapPoints],
-    );
-    const marginHorizontal = useResponsiveProp({
-      base: spacing.spacingNONE,
-      sm: spacing.spacingS,
-      md: spacing.spacingM,
-      lg: spacing.spacingL,
-      xl: spacing.spacingXL,
-    });
+    const { colors, spacing } = useGetTheme();
+
+    const _snapPoints = useMemo(() => snapPoints ?? [1, "40%"], [snapPoints]);
 
     const renderBackDrop = (_props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
@@ -44,20 +33,21 @@ const BottomSheet = React.forwardRef<BottomSheetModalMethods, BottomSheetProps>(
       <BottomSheetModal
         {...rest}
         ref={ref}
+        index={1}
         snapPoints={_snapPoints}
         handleIndicatorStyle={{
-          backgroundColor: colors.mainBackground,
-          width: spacing.spacingL,
-          marginBottom: spacing.spacingM,
+          backgroundColor: colors.primary,
+          width: spacing.spacingXXL,
         }}
         backdropComponent={renderBackDrop}
-        backgroundStyle={{
-          backgroundColor: colors.mainBackground,
-          borderTopEndRadius: borderRadii.borderRadiiMD,
-          marginHorizontal,
-        }}
       >
-        <Box flex={1}>{children}</Box>
+        <BottomSheetView
+          style={{
+            flex: 1,
+          }}
+        >
+          {children}
+        </BottomSheetView>
       </BottomSheetModal>
     );
   },

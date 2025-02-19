@@ -6,17 +6,17 @@
     "strict": true,
      "baseUrl": ".",
      "paths": {
-       "_shared": ["src/shared"],
-       "_config": ["src/config"],
        "_assets": ["src/assets"],
+       "_config": ["src/config"],
        "_features": ["src/features"],
-       "_theme": ["src/theme"],
-       "_utils": ["src/utils"],
        "_hooks": ["src/hooks"],
-       "_services": ["src/services"],
        "_i18n": ["src/i18n"],
+       "_navigations": ["src/navigations"],
+       "_services": ["src/services"],
+       "_shared": ["src/shared"],
        "_store": ["src/store"],
-       "_navigations": ["src/navigations"]
+       "_theme": ["src/theme"],
+       "_utils": ["src/utils"]
      }
   }
 }
