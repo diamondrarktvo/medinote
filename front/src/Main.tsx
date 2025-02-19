@@ -2,7 +2,7 @@ import { ThemeProvider } from "@shopify/restyle";
 import { StackNavigation } from "_navigations";
 import { theme, darkTheme } from "_theme";
 import { StatusBar } from "react-native";
-import { useAppSelector } from "_store";
+import { useAppSelector } from "./store";
 import { selectors } from "src/features/theme/themeSlice";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 

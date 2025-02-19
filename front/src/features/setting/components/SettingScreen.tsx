@@ -20,8 +20,6 @@ export default function SettingScreen() {
   const themeRef = useRef<BottomSheetModal>(null);
   const currentTheme = useAppSelector(themeSelectors.currentTheme);
 
-  console.log("currentLanguage", currentLanguage);
-
   const ALL_MENUS_AND_ITEMS: MenuAndItemsT[] = useMemo(() => {
     return [
       {

@@ -1,3 +1,1 @@
-export { store } from "./store";
-
-export { useAppDispatch, useAppSelector } from "./hook";
+export { store, useAppDispatch, useAppSelector } from "./store";
