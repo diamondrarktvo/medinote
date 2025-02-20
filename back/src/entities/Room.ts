@@ -23,6 +23,8 @@ export class Room {
   @CreateDateColumn({ type: "timestamp" })
   created_at!: Date;
 
-  @OneToMany(() => VoiceEntry, (voiceEntry) => voiceEntry.room)
+  @OneToMany(() => VoiceEntry, (voiceEntry) => voiceEntry.room, {
+    cascade: true,
+  })
   voiceEntries!: VoiceEntry[];
 }

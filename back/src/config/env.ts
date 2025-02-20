@@ -15,4 +15,8 @@ export const env = {
   // Configuration du serveur
   PORT: process.env.SERVER_PORT,
   NODE_ENV: process.env.NODE_ENV,
+
+  // encription key
+  ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || "",
+  ENCRYPTION_IV: process.env.ENCRYPTION_IV || "",
 };

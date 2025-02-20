@@ -11,7 +11,12 @@ export const createRoom = async (
   try {
     const { device_id, title } = req.body;
     const newRoom = await roomService.createRoom({ device_id, title });
-    res.status(201).json(newRoom);
+
+    res.status(201).json({
+      success: true,
+      message: "Rooms created successfully",
+      data: newRoom,
+    });
   } catch (error) {
     next(error);
   }
@@ -37,7 +42,11 @@ export const getAllRooms = async (
         message: "No rooms found for this device ID.",
       });
     }
-    res.json(rooms);
+    res.status(200).json({
+      success: true,
+      message: "Rooms retrieved successfully",
+      data: rooms,
+    });
   } catch (error) {
     next(error);
   }
@@ -64,7 +73,12 @@ export const getRoomById = async (
         message: "Room not found for this device.",
       });
     }
-    res.json({ success: true, room });
+
+    res.status(200).json({
+      success: true,
+      message: "Room retrieved successfully",
+      data: room,
+    });
   } catch (error) {
     next(error);
   }
@@ -79,7 +93,12 @@ export const updateRoom = async (
     const roomId = parseInt(req.params.id, 10);
     const updateData = req.body;
     const updatedRoom = await roomService.updateRoom(roomId, updateData);
-    res.json(updatedRoom);
+
+    res.status(200).json({
+      success: true,
+      message: "Rooms updated successfully",
+      data: updateRoom,
+    });
   } catch (error) {
     next(error);
   }
@@ -93,7 +112,12 @@ export const deleteRoom = async (
   try {
     const roomId = parseInt(req.params.id, 10);
     await roomService.deleteRoom(roomId);
-    res.status(204).send();
+
+    res.status(204).json({
+      success: true,
+      message: "Room deleted successfully",
+      data: null,
+    });
   } catch (error) {
     next(error);
   }

@@ -3,7 +3,7 @@ import { Room } from "../entities/Room";
 
 import { AppDataSource } from "../config/data-source";
 import { QueryFailedError } from "typeorm";
-import { AppError } from "../utils/appError";
+import { AppError } from "../utils/AppError";
 
 export const createRoom = async (data: {
   device_id: string;
@@ -32,7 +32,6 @@ export const getRoomsByDevice = async (deviceId: string): Promise<Room[]> => {
   const roomRepository = AppDataSource.getRepository(Room);
   return await roomRepository.find({
     where: { device_id: deviceId },
-    relations: ["voiceEntries"],
   });
 };
 
