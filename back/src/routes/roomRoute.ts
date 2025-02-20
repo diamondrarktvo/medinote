@@ -2,14 +2,17 @@
 
 import { Router } from "express";
 import * as roomController from "../controllers/roomController";
+import { asyncHandler } from "../utils/asyncHandler";
 
 const router = Router();
 
 router.post("/", roomController.createRoom);
 
-router.get("/", roomController.getAllRooms);
+// GET /api/v1/rooms?device_id=xxx
+router.get("/", asyncHandler(roomController.getAllRooms));
 
-router.get("/:id", roomController.getRoomById);
+// GET /api/v1/rooms/:id?device_id=xxx
+router.get("/:id", asyncHandler(roomController.getRoomById));
 
 router.put("/:id", roomController.updateRoom);
 

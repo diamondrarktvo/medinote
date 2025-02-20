@@ -23,7 +23,20 @@ export const getAllRooms = async (
   next: NextFunction,
 ) => {
   try {
-    const rooms = await roomService.getAllRooms();
+    const deviceId = req.query.device_id as string;
+    if (!deviceId) {
+      return res.status(400).json({
+        success: false,
+        message: "Device ID is required to fetch rooms.",
+      });
+    }
+    const rooms = await roomService.getRoomsByDevice(deviceId);
+    if (rooms.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No rooms found for this device ID.",
+      });
+    }
     res.json(rooms);
   } catch (error) {
     next(error);
@@ -36,13 +49,22 @@ export const getRoomById = async (
   next: NextFunction,
 ) => {
   try {
-    const roomId = parseInt(req.params.id, 10);
-    const room = await roomService.getRoomById(roomId);
-    if (room) {
-      res.json(room);
-    } else {
-      res.status(404).json({ message: "Room not found" });
+    const deviceId = req.query.device_id as string;
+    if (!deviceId) {
+      return res.status(400).json({
+        success: false,
+        message: "Device ID is required.",
+      });
     }
+    const roomId = parseInt(req.params.id, 10);
+    const room = await roomService.getRoomByIdAndDevice(roomId, deviceId);
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: "Room not found for this device.",
+      });
+    }
+    res.json({ success: true, room });
   } catch (error) {
     next(error);
   }

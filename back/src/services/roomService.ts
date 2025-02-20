@@ -28,15 +28,21 @@ export const createRoom = async (data: {
   }
 };
 
-export const getAllRooms = async (): Promise<Room[]> => {
+export const getRoomsByDevice = async (deviceId: string): Promise<Room[]> => {
   const roomRepository = AppDataSource.getRepository(Room);
-  return await roomRepository.find({ relations: ["voiceEntries"] });
+  return await roomRepository.find({
+    where: { device_id: deviceId },
+    relations: ["voiceEntries"],
+  });
 };
 
-export const getRoomById = async (id: number): Promise<Room | null> => {
+export const getRoomByIdAndDevice = async (
+  id: number,
+  deviceId: string,
+): Promise<Room | null> => {
   const roomRepository = AppDataSource.getRepository(Room);
   return await roomRepository.findOne({
-    where: { id },
+    where: { id: id, device_id: deviceId },
     relations: ["voiceEntries"],
   });
 };
