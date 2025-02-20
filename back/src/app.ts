@@ -28,6 +28,33 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/uploads", (req, res, next) => {
+  const filePath = path.join(__dirname, "..", "uploads", req.path);
+
+  // Vérifier si le fichier existe
+  if (fs.existsSync(filePath)) {
+    // Définir le type MIME en fonction de l'extension du fichier
+    if (req.path.endsWith(".aac")) {
+      res.type("audio/aac");
+    } else if (req.path.endsWith(".mp3")) {
+      res.type("audio/mpeg");
+    } else if (req.path.endsWith(".wav")) {
+      res.type("audio/wav");
+    } else if (req.path.endsWith(".ogg")) {
+      res.type("audio/ogg");
+    }
+
+    const userAgent = req.headers["user-agent"] || "";
+    if (userAgent.includes("PostmanRuntime")) {
+      res.set("Content-Disposition", "attachment");
+    } else {
+      res.set("Content-Disposition", "inline");
+    }
+  }
+
+  next();
+});
+
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Middlewares pour parser les corps de requêtes en JSON et URL-encoded
