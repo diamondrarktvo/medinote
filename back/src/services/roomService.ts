@@ -43,11 +43,18 @@ export const getRoomById = async (id: number): Promise<Room | null> => {
 
 export const updateRoom = async (
   id: number,
-  data: Partial<Room>,
+  updateData: Partial<Room>,
 ): Promise<Room | null> => {
   const roomRepository = AppDataSource.getRepository(Room);
-  await roomRepository.update(id, data);
-  return await getRoomById(id);
+
+  const room = await roomRepository.findOne({ where: { id } });
+  if (!room) {
+    return null;
+  }
+
+  roomRepository.merge(room, updateData);
+
+  return await roomRepository.save(room);
 };
 
 export const deleteRoom = async (id: number): Promise<void> => {
