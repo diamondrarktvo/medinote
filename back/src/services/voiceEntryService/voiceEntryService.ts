@@ -4,7 +4,6 @@ import path from "path";
 import { AppDataSource } from "../../config/data-source";
 import { Room } from "../../entities/Room";
 import { VoiceEntry } from "../../entities/VoiceEntry";
-import { getFilePath } from "../../utils/helper";
 
 export const createVoiceEntry = async (data: {
   transcription: string;

@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from "express";
 import { Room } from "../entities/Room";
 import * as voiceEntryService from "../services/voiceEntryService";
 import { AppDataSource } from "../config/data-source";
-import { getFilePath } from "../utils/helper";
+import { getFilePath, getFullUrl } from "../utils/helper";
 
 export const createVoiceEntryController = async (
   req: Request,
@@ -101,7 +101,7 @@ export const getVoiceEntryByRoomId = async (
 
         return {
           ...entry,
-          recording_url: decryptedFilePath, // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré
+          recording_url: getFullUrl(decryptedFilePath), // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré
         };
       }),
     );

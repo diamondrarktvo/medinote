@@ -1,5 +1,6 @@
 // src/app.ts
 
+import fs from "fs";
 import express, { Application, Request, Response } from "express";
 import { apiVersion } from "./config/constant";
 import roomRoutes from "./routes/roomRoute";
@@ -14,9 +15,20 @@ import path from "path";
 
 const app: Application = express();
 
-const uploadDir = path.join(__dirname, "uploads");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization",
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+  );
+  next();
+});
 
-app.use("/uploads", express.static(uploadDir));
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Middlewares pour parser les corps de requêtes en JSON et URL-encoded
 app.use(express.json());
