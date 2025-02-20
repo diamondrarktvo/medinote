@@ -17,7 +17,7 @@ export class Room {
   @Column({ length: 255 })
   device_id!: string;
 
-  @Column({ length: 255, nullable: true })
+  @Column({ length: 255, unique: true })
   title!: string;
 
   @CreateDateColumn({ type: "timestamp" })

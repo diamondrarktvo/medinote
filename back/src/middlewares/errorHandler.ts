@@ -1,17 +1,23 @@
-// src/middlewares/errorHandler.ts
+import { ErrorRequestHandler } from "express";
 
-import { Request, Response, NextFunction } from "express";
-import logger from "../utils/logger";
-
-export function errorHandler(
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void {
-  logger.error(err.stack || err.message);
-
+export const errorHandler: ErrorRequestHandler = (
+  err,
+  req,
+  res,
+  next,
+): void => {
   console.error(err.stack);
 
-  res.status(500).json({ error: "Something went wrong!" });
-}
+  if (err.name === "AppError") {
+    res.status(400).json({
+      success: false,
+      message: err.message,
+    });
+    return; // retourne undefined, conforme au type void
+  }
+
+  res.status(500).json({
+    success: false,
+    message: "Une erreur interne est survenue.",
+  });
+};
