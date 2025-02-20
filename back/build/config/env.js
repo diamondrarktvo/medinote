@@ -20,4 +20,5 @@ exports.env = {
     // encription key
     ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || "",
     ENCRYPTION_IV: process.env.ENCRYPTION_IV || "",
+    BASE_URL: process.env.BASE_URL,
 };

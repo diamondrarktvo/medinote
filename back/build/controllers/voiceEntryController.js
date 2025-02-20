@@ -115,7 +115,7 @@ const getVoiceEntryByRoomId = (req, res, next) => __awaiter(void 0, void 0, void
             const decryptedFilePath = yield voiceEntryService.decryptFile(encryptedFilePath); // Chemin relatif du fichier déchiffré
             // Supprimer l'ancien fichier chiffré (optionnel)
             fs_1.default.unlinkSync(encryptedFilePath);
-            return Object.assign(Object.assign({}, entry), { recording_url: decryptedFilePath });
+            return Object.assign(Object.assign({}, entry), { recording_url: (0, helper_1.getFullUrl)(decryptedFilePath) });
         })));
         res.status(200).json({
             success: true,
