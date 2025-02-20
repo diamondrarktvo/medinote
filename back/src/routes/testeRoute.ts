@@ -1,7 +1,7 @@
 // src/routes/testRoutes.ts
 
 import { Router, Request, Response } from "express";
-import connectionPool from "../config/database";
+import connectionPool from "../config/connectionPool";
 
 const router = Router();
 

@@ -1,5 +1,6 @@
-import { env } from "./env";
 // src/config/database.ts
+
+import { env } from "./env";
 
 import mysql from "mysql2/promise";
 
