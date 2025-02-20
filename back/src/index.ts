@@ -2,6 +2,7 @@
 
 import http, { Server } from "http";
 import app from "./app";
+import { env } from "./config/env";
 
 /**
  * Normalize a port into a number, string, or false.
@@ -18,7 +19,7 @@ function normalizePort(val: string | number): number | string | false {
   return false;
 }
 
-const port = normalizePort(process.env.PORT || "3030");
+const port = normalizePort(env.PORT ?? "3030");
 app.set("port", port);
 
 /**
