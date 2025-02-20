@@ -1,6 +1,13 @@
 // src/app.ts
 
 import express, { Application, Request, Response, NextFunction } from "express";
+import { apiVersion } from "./config/constant";
+
+//routes import
+import testRoute from "./routes/testeRoute";
+
+//middlewares import
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app: Application = express();
 
@@ -8,15 +15,14 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Exemple de route de base
+//all routes
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from Express with TypeScript!");
+  res.send("Connection to express.js done.");
 });
 
+app.use(`/api/${apiVersion}`, testRoute);
+
 // Middleware de gestion des erreurs
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Something went wrong!" });
-});
+app.use(errorHandler);
 
 export default app;
