@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const pool = mysql.createPool({
+const connectionPool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -16,4 +16,4 @@ const pool = mysql.createPool({
   charset: "utf8mb4",
 });
 
-export default pool;
+export default connectionPool;

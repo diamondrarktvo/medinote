@@ -1,13 +1,13 @@
 // src/routes/testRoutes.ts
 
 import { Router, Request, Response } from "express";
-import pool from "../config/database";
+import connectionPool from "../config/database";
 
 const router = Router();
 
 router.get("/test-connection", async (req: Request, res: Response) => {
   try {
-    const [rows] = await pool.query("SELECT 1");
+    const [rows] = await connectionPool.query("SELECT 1");
     res.json({ success: true, rows });
   } catch (error) {
     console.error("Database error:", error);
