@@ -86,21 +86,27 @@ export default function RoomScreen() {
         />
 
         <BottomSheet ref={createRoomRef} snapPoints={[1, "24%"]}>
-          <Text variant={"primaryBold"} textAlign={"center"}>
-            {t("recording:label.name_room")}
-          </Text>
-          <Input
-            placeholder="ex: Things"
-            value={newRoomName}
-            onChangeText={(text) => setNewRoomName(text)}
-          />
+          <Box marginHorizontal={"m"}>
+            <Text
+              variant={"primaryBold"}
+              textAlign={"center"}
+              marginBottom={"m"}
+            >
+              {t("recording:label.name_room")}
+            </Text>
+            <Input
+              placeholder="ex: Things"
+              value={newRoomName}
+              onChangeText={(text) => setNewRoomName(text)}
+            />
+          </Box>
           <Button
             onPress={handleCreateRoom}
             label={t("common:actions.validate")}
             variant="primary"
             width={sizes.DIMENSIONS.width.medium as unknown as number}
             alignSelf={"center"}
-            marginTop={"s"}
+            marginTop={"m"}
             loading={isLoading}
           />
         </BottomSheet>
