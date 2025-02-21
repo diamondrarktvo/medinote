@@ -20,7 +20,7 @@ export class Room {
   @Column({ length: 255, unique: true })
   title!: string;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at!: Date;
 
   @OneToMany(() => VoiceEntry, (voiceEntry) => voiceEntry.room, {

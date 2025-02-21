@@ -1,12 +1,4 @@
-// src/entities/VoiceEntry.ts
-
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  ManyToOne,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Room } from "./Room";
 
 @Entity()
@@ -23,7 +15,8 @@ export class VoiceEntry {
   @Column({ type: "text", nullable: true })
   summary!: string;
 
-  @CreateDateColumn({ type: "timestamp" })
+  // Utilisez @Column au lieu de @CreateDateColumn
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at!: Date;
 
   @ManyToOne(() => Room, (room) => room.voiceEntries, { onDelete: "CASCADE" })
