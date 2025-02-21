@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabParamList, TabRouteTypes } from "./types";
 import { useTheme } from "@shopify/restyle";
 import { ThemeT } from "_theme";
-import { RecordingScreen, SettingScreen } from "_features";
+import { RoomScreen, SettingScreen } from "_features";
 import { Icon, Text } from "_shared";
 import { Layouts } from "_utils";
 import { useTranslation } from "react-i18next";
@@ -22,8 +22,8 @@ const TabNavigation = () => {
   const TABROUTES: TabRouteTypes[] = useMemo(() => {
     return [
       {
-        name: "voice_analysis_screen",
-        component: RecordingScreen,
+        name: "room_screen",
+        component: RoomScreen,
         tabLabel: t("tab_navigation.label.recording"),
         icon: "record-voice-over",
       },
@@ -38,7 +38,7 @@ const TabNavigation = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="voice_analysis_screen"
+      initialRouteName="room_screen"
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,

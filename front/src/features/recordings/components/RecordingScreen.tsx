@@ -1,36 +1,32 @@
 import { Scaffold, Box } from "_shared";
 import { useTranslation } from "react-i18next";
-import RoomList from "./room/RoomList";
-import { useGetAllRoomsByDeviceQuery } from "../RecordingApi";
-import { useCallback, useEffect, useState } from "react";
-import { getDeviceId } from "../RecordingUtils";
+import RecordingList from "./recording/RecordingList";
+import { useGetAllVoicesByRoomQuery } from "../RecordingApi";
+import { useCallback } from "react";
 import { useErrorHandler } from "_hooks";
 import { ErrorResponse } from "_utils";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
+import VoiceRecorder from "./recording/RecordingButton";
 
 export default function RecordingScreen() {
+  const { room_id } = useRoute().params as {
+    room_id: number;
+  };
+
   const { t } = useTranslation("common");
-  const [deviceId, setDeviceId] = useState("");
 
-  const { data, error, refetch, isUninitialized } = useGetAllRoomsByDeviceQuery(
-    {
-      device_id: deviceId,
-    },
-    {
-      skip: !deviceId,
-      refetchOnFocus: true,
-      refetchOnReconnect: false,
-      refetchOnMountOrArgChange: true,
-    },
-  );
-
-  useEffect(() => {
-    getDeviceId().then((res) => {
-      if (res) {
-        setDeviceId(res);
-      }
-    });
-  }, []);
+  const { data, error, refetch, isUninitialized, isLoading, isFetching } =
+    useGetAllVoicesByRoomQuery(
+      {
+        room_id: room_id,
+      },
+      {
+        skip: !room_id,
+        refetchOnFocus: true,
+        refetchOnReconnect: false,
+        refetchOnMountOrArgChange: true,
+      },
+    );
 
   useFocusEffect(
     useCallback(() => {
@@ -48,7 +44,9 @@ export default function RecordingScreen() {
       titleTabScreen={t("tab_navigation.label.recording")}
     >
       <Box flex={1} marginTop={"l"}>
-        <RoomList rooms={data} refetch={refetch} />
+        <RecordingList voices={data} refetch={refetch} />
+
+        <VoiceRecorder room_id={room_id} />
       </Box>
     </Scaffold>
   );

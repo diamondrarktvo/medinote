@@ -28,7 +28,7 @@ const RecordingApi = BaseApi.injectEndpoints({
       }
     >({
       query: ({ room_id }) => ({
-        url: config.ROOM.GET + room_id,
+        url: config.VOICE.GET + room_id,
         method: "GET",
       }),
       transformResponse: (response: ApiResponse<VoiceT[]>): VoiceT[] => {

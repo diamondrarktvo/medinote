@@ -7,10 +7,13 @@ export interface StackNavigationConfig {
 
 export type StackParamList = {
   main_tabs: undefined;
+  voice_screen: {
+    room_id: number;
+  };
 };
 
 export type TabParamList = {
-  voice_analysis_screen: undefined;
+  room_screen: undefined;
   setting_screen: undefined;
 };
 

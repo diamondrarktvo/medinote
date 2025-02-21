@@ -18,6 +18,7 @@
   "content": {
     "empty_menu": "No menu available at the moment.",
     "empty_room": "No rooms available at the moment.",
+    "empty_voice_record": "No voice recording at the moment",
     "app_version": "Version {{versionNumber}}"
   },
   "actions": {

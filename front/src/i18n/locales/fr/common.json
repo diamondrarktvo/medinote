@@ -18,6 +18,7 @@
   "content": {
     "empty_menu": "Aucun menu n'est disponible pour le moment.",
     "empty_room": "Aucun salon disponible pour le moment.",
+    "emmty_voice_record": "Aucun enregistrement vocal pour le moment",
     "app_version": "Version {{versionNumber}}"
   },
   "actions": {

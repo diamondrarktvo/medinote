@@ -1,7 +1,7 @@
 import React from "react";
 
 import { FlashList } from "@shopify/flash-list";
-import { EmptyList } from "_shared";
+import { Box, EmptyList } from "_shared";
 import { useTranslation } from "react-i18next";
 import { RoomT } from "../../RecordingTypes";
 import RenderRoomItem from "./RoomItem";
@@ -21,10 +21,14 @@ const RoomList: React.FC<{
         <RefreshControl refreshing={false} onRefresh={refetch} enabled={true} />
       }
       data={rooms}
-      renderItem={RenderRoomItem}
+      renderItem={({ item }) => <RenderRoomItem item={item} />}
       extraData={rooms}
       showsVerticalScrollIndicator={false}
-      ListEmptyComponent={<EmptyList textToShow={t("content.empty_room")} />}
+      ListEmptyComponent={
+        <Box flex={1} justifyContent={"center"} alignItems={"center"}>
+          <EmptyList textToShow={t("content.empty_room")} />
+        </Box>
+      }
     />
   );
 };
