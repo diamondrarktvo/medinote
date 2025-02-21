@@ -9,12 +9,17 @@ export const decryptFile = async (
   encryptedFilePath: string,
 ): Promise<string> => {
   const algorithm = "aes-256-cbc";
-  const key = Buffer.from(env.ENCRYPTION_KEY, "hex"); // Clé de chiffrement
-  const iv = Buffer.from(env.ENCRYPTION_IV, "hex"); // Vecteur d'initialisation
+  const key = Buffer.from(env.ENCRYPTION_KEY, "hex");
+  const iv = Buffer.from(env.ENCRYPTION_IV, "hex");
 
   const input = fs.createReadStream(encryptedFilePath);
-  const decryptedFileName = path.basename(encryptedFilePath, ".enc"); // Nom du fichier sans .enc
-  const decryptedFilePath = path.join("uploads", decryptedFileName); // Chemin relatif du fichier déchiffré
+  const decryptedFileName = path.basename(encryptedFilePath, ".enc");
+
+  const decryptedFilePath = path.join(
+    process.cwd(),
+    "uploads",
+    decryptedFileName,
+  );
   const output = fs.createWriteStream(decryptedFilePath);
 
   const decipher = crypto.createDecipheriv(algorithm, key, iv);
@@ -22,7 +27,7 @@ export const decryptFile = async (
 
   return new Promise((resolve, reject) => {
     output.on("finish", () => {
-      resolve(decryptedFilePath); // Retourne le chemin relatif du fichier déchiffré
+      resolve(decryptedFilePath);
     });
     output.on("error", reject);
   });

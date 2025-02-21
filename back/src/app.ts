@@ -15,18 +15,6 @@ import path from "path";
 
 const app: Application = express();
 
-console.log("Répertoire courant (__dirname) :", __dirname);
-console.log("Répertoire de travail (process.cwd()) :", process.cwd());
-
-// Log du contenu du dossier 'uploads'
-const uploadsDir = path.join(process.cwd(), "uploads");
-try {
-  const items = fs.readdirSync(uploadsDir);
-  console.log(`Contenu du dossier ${uploadsDir} :`, items);
-} catch (error) {
-  console.error("Erreur lors de la lecture du dossier uploads:", error);
-}
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -41,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/uploads", (req, res, next) => {
-  const filePath = path.join(__dirname, "..", "uploads", req.path);
+  const filePath = path.join(process.cwd(), "uploads", req.path);
 
   // Vérifier si le fichier existe
   if (fs.existsSync(filePath)) {
@@ -57,7 +45,7 @@ app.use("/uploads", (req, res, next) => {
     }
 
     const userAgent = req.headers["user-agent"] || "";
-    if (userAgent.includes("PostmanRuntime")) {
+    if (userAgent.includes("Postman")) {
       res.set("Content-Disposition", "attachment");
     } else {
       res.set("Content-Disposition", "inline");
@@ -67,7 +55,7 @@ app.use("/uploads", (req, res, next) => {
   next();
 });
 
-app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // Middlewares pour parser les corps de requêtes en JSON et URL-encoded
 app.use(express.json());
