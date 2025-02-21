@@ -15,6 +15,18 @@ import path from "path";
 
 const app: Application = express();
 
+console.log("Répertoire courant (__dirname) :", __dirname);
+console.log("Répertoire de travail (process.cwd()) :", process.cwd());
+
+// Log du contenu du dossier 'uploads'
+const uploadsDir = path.join(process.cwd(), "uploads");
+try {
+  const items = fs.readdirSync(uploadsDir);
+  console.log(`Contenu du dossier ${uploadsDir} :`, items);
+} catch (error) {
+  console.error("Erreur lors de la lecture du dossier uploads:", error);
+}
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
