@@ -85,7 +85,7 @@ export default function RoomScreen() {
           onPress={handleOpenBottomSheet}
         />
 
-        <BottomSheet ref={createRoomRef} snapPoints={[1, "24%"]}>
+        {/* <BottomSheet ref={createRoomRef} snapPoints={[1, "24%"]}>
           <Box marginHorizontal={"m"}>
             <Text
               variant={"primaryBold"}
@@ -108,8 +108,9 @@ export default function RoomScreen() {
             alignSelf={"center"}
             marginTop={"m"}
             loading={isLoading}
+            
           />
-        </BottomSheet>
+        </BottomSheet>*/}
       </Box>
     </Scaffold>
   );

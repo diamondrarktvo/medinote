@@ -62,14 +62,12 @@ const RecordingApi = BaseApi.injectEndpoints({
       }
     >({
       query: ({ audio, roomId }) => {
-        //It's very necessary
-        const audioUri =
-          Platform.OS === "android" ? `file://${audio.uri}` : audio.uri;
+        console.log("audio", audio);
 
         const bodyFormData = new FormData();
         //@ts-ignore
-        bodyFormData.append("video", {
-          uri: audioUri,
+        bodyFormData.append("audioFile", {
+          uri: audio.uri,
           name: audio.name,
           type: audio.content_type,
         });

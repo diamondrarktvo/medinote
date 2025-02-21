@@ -3,13 +3,11 @@ import { Audio } from "expo-av";
 import { useSendRecordMutation } from "../../RecordingApi";
 import { Box, Button, Text } from "_shared";
 import { StyleSheet } from "react-native";
-import { ErrorResponse, Helpers } from "_utils";
-import { useErrorHandler } from "_hooks";
+import { Helpers } from "_utils";
 
 const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [isRecording, setIsRecording] = useState(false);
-  const [recordedUri, setRecordedUri] = useState<string | null>(null);
 
   const [sendRecord, { isLoading, error }] = useSendRecordMutation();
 
@@ -48,7 +46,6 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
 
       const uri = recording.getURI();
 
-      setRecordedUri(uri);
       setIsRecording(false);
 
       return uri;
@@ -62,15 +59,23 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
     if (isRecording) {
       const uri = await stopRecording();
       if (uri) {
+        // Extraire le nom du fichier à partir de l'URI
+        const fileName = Helpers.extractFileInfo(uri).fileName;
+
+        // Déduire le content-type en fonction de l'extension
+        const contentType =
+          Helpers.extractFileInfo(uri).content_type ||
+          "application/octet-stream";
+
         // Envoyer l'enregistrement via la mutation RTK Query
         sendRecord({
           audio: {
             uri: uri,
-            name: "",
-            content_type: "",
+            name: fileName,
+            content_type: contentType,
           },
           roomId: room_id,
-        });
+        }).unwrap();
       }
     } else {
       await startRecording();
@@ -89,15 +94,6 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
         label={isRecording ? "Stop Recording" : "Start Recording"}
         onPress={handleRecordPress}
       />
-      {recordedUri && (
-        <Text style={styles.text}>Recorded File: {recordedUri}</Text>
-      )}
-      {isLoading && <Text style={styles.text}>Sending recording...</Text>}
-      {error && (
-        <Text style={styles.error}>
-          Error sending recording: {JSON.stringify(error)}
-        </Text>
-      )}
     </Box>
   );
 };
