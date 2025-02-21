@@ -93,10 +93,10 @@ export const getVoiceEntryByRoomId = async (
     const updatedVoiceEntries = await Promise.all(
       voiceEntries.map(async (entry) => {
         const encryptedFilePath = getFilePath(entry.recording_url); // Chemin complet du fichier chiffré
-        console.log("encryptedFilePath", encryptedFilePath);
+
         const decryptedFilePath =
           await voiceEntryService.decryptFile(encryptedFilePath); // Chemin relatif du fichier déchiffré
-        console.log("decryptedFilePath", decryptedFilePath);
+
         return {
           ...entry,
           recording_url: getFullUrl(decryptedFilePath), // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré

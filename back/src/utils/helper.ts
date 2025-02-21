@@ -21,7 +21,5 @@ export const getFullUrl = (filePath: string): string => {
     relativePath = path.relative(process.cwd(), filePath);
   }
 
-  console.log(`fullurl : ${baseUrl}/${relativePath}`);
-
   return `${baseUrl}/${relativePath}`;
 };
