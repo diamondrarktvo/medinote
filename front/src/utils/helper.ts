@@ -174,6 +174,13 @@ const getAppVersion = () => {
   return packageJson.version;
 };
 
+function getFirstLetter(text: string): string {
+  if (text === "") {
+    return "";
+  }
+  return text.charAt(0);
+}
+
 export const Layouts = {
   widthPercentageToDP,
   heightPercentageToDP,
@@ -196,4 +203,5 @@ export const Helpers = {
   changeColorStyleFromRNTypo,
   isLanguageSupported,
   getAppVersion,
+  getFirstLetter,
 };
