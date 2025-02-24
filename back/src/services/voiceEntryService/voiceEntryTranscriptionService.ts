@@ -1,13 +1,14 @@
 // src/services/voiceEntryService/voiceEntryTranscriptionService.ts
 
 import axios from "axios";
+import { generateFileUrl } from "../../utils/helper";
 
 export const transcribeAudio = async (filePath: string): Promise<string> => {
-  console.log("Chemin du fichier audio :", filePath);
+  const finalFilePath = generateFileUrl(filePath);
   try {
     const response = await axios.post(
       "https://transcription.onrender.com/api/transcript",
-      { audioURL: filePath },
+      { audioURL: finalFilePath },
       { headers: { "Content-Type": "application/json" } },
     );
 

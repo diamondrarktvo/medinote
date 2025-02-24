@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from "express";
 import { Room } from "../entities/Room";
 import * as voiceEntryService from "../services/voiceEntryService";
 import { AppDataSource } from "../config/data-source";
-import { getFilePath, getFullUrl } from "../utils/helper";
+import { getFilePath, generateFileUrl } from "../utils/helper";
 
 export const createVoiceEntryController = async (
   req: Request,
@@ -39,18 +39,25 @@ export const createVoiceEntryController = async (
         .json({ success: false, message: "Room not found" });
     }
 
+    console.log("debut du travail");
     // Transcription de l'audio
     const transcription = await voiceEntryService.transcribeAudio(
       req.file.path,
     );
 
+    console.log("transcription", transcription);
+
     // Résumé de la transcription
     const summary = await voiceEntryService.summarizeText(transcription);
+
+    console.log("summary", summary);
 
     // Chiffrement du fichier audio
     const encryptedFilePath = await voiceEntryService.encryptFile(
       req.file.path,
     );
+
+    console.log("encryptedFilePath", encryptedFilePath);
 
     // save voice entry
     const voiceEntrySaved = await voiceEntryService.createVoiceEntry({
@@ -99,7 +106,7 @@ export const getVoiceEntryByRoomId = async (
 
         return {
           ...entry,
-          recording_url: getFullUrl(decryptedFilePath), // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré
+          recording_url: generateFileUrl(decryptedFilePath), // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré
         };
       }),
     );

@@ -8,7 +8,7 @@ export const getFilePath = (fileName: string): string => {
   return path.join(process.cwd(), "uploads", fileName);
 };
 
-export const getFullUrl = (filePath: string): string => {
+export const generateFileUrl = (filePath: string): string => {
   const baseUrl = env.BASE_URL;
   // Recherche l'indice de "uploads" dans le chemin complet
   const uploadsIndex = filePath.indexOf("uploads");
