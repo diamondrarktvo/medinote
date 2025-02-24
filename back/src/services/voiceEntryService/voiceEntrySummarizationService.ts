@@ -1,20 +1,39 @@
 // src/services/voiceEntryService/voiceEntrySummarizationService.ts
+import axios from "axios";
+import { env } from "../../config/env";
 
 export const summarizeText = async (transcription: string): Promise<string> => {
-  // Simuler le traitement par un service d'IA pour générer un résumé structuré.
+  // Construire le prompt pour générer un résumé structuré
+  const prompt = `Please generate a structured summary, in french, for the following medical transcription. The summary should be divided into three sections: "Anamnèse", "Diagnostic", and "Traitement". Here is the transcription: "${transcription}"`;
 
-  const summary = `
-    Anamnèse : Le patient se présente avec une fatigue persistante depuis 3 semaines, accompagnée de douleurs musculaires, de maux de tête et de vertiges occasionnels. Il signale également des difficultés de concentration. Les symptômes sont apparus progressivement et ne sont pas liés à un événement particulier. Le patient mentionne un niveau de stress élevé au travail ces derniers temps.
-
-    Diagnostic : Compte tenu des symptômes rapportés, il est recommandé de réaliser des examens complémentaires (bilan sanguin, etc.) afin d'explorer les causes possibles de la fatigue et des autres symptômes. Le diagnostic différentiel inclut : fatigue chronique, troubles thyroïdiens, carences nutritionnelles, stress, etc.
-
-    Traitement : Dans l'attente des résultats des examens complémentaires, il est conseillé au patient de :
-    - Adopter une alimentation équilibrée et de pratiquer une activité physique régulière, adaptée à ses capacités.
-    - Gérer le stress par des techniques de relaxation (méditation, respiration profonde, etc.).
-    - Assurer un sommeil suffisant et de qualité.
-    - Consulter un médecin du travail si le stress professionnel est un facteur important.
-
-    En cas de résultats anormaux aux examens complémentaires, un traitement spécifique sera proposé en fonction du diagnostic établi.
-  `;
-  return summary;
+  try {
+    const response = await axios.post(
+      env.OPENAI_API_URL!,
+      {
+        model: "gpt-3.5-turbo-0613",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a medical assistant that provides structured summaries from audio transcriptions.",
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+        },
+      },
+    );
+    const summary = response.data.choices[0].message.content.trim();
+    return summary;
+  } catch (error) {
+    console.error("Erreur lors de l'appel à l'API de résumé:", error);
+    return "Résumé simulé :\nAnamnèse - Le patient présente une fatigue et des douleurs articulaires persistantes depuis une semaine.\nDiagnostic - Aucun signe d'infection ou d'anomalie aiguë n'est détecté.\nTraitement - Recommandation de repos et suivi médical régulier.";
+  }
 };

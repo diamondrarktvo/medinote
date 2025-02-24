@@ -20,4 +20,6 @@ export const env = {
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || "",
   ENCRYPTION_IV: process.env.ENCRYPTION_IV || "",
   BASE_URL: process.env.BASE_URL,
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  OPENAI_API_URL: process.env.OPENAI_API_URL,
 };
