@@ -82,7 +82,10 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
           })
           .catch((err) => {
             console.error(err);
-            Helpers.showToast("error", "Failed to send recording.");
+            Helpers.showToast(
+              "error",
+              "Une erreur s'est produite lors de l'envoi de l'enregistrement.",
+            );
           });
       }
     } else {

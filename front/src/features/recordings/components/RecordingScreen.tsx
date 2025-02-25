@@ -23,7 +23,7 @@ export default function RecordingScreen() {
       {
         skip: !room_id,
         refetchOnFocus: true,
-        refetchOnReconnect: false,
+        refetchOnReconnect: true,
         refetchOnMountOrArgChange: true,
       },
     );
