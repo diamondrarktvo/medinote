@@ -23,6 +23,9 @@ export const env = {
   AI_KEY: process.env.AI_KEY,
   AI_URL: process.env.AI_URL,
   GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  GLADIA_API_KEY: process.env.GLADIA_API_KEY,
+  GLADIA_UPLOAD_URL: process.env.GLADIA_UPLOAD_URL,
+  GLADIA_TRANSCRIPTION_URL: process.env.GLADIA_TRANSCRIPTION_URL,
 };
 
 /*
@@ -40,4 +43,7 @@ BASE_URL="http://localhost:3030"
 AI_KEY="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"
 AI_URL="https://api.openai.com/v1/chat/completions"
 GITHUB_TOKEN="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"
+GLADIA_API_KEY="cffddd86-a972-4747-bda9-d349d7bdde34"
+GLADIA_UPLOAD_URL="https://api.gladia.io/v2/upload"
+GLADIA_TRANSCRIPTION_URL="https://api.gladia.io/v2/pre-recorded"
 */
