@@ -5,6 +5,7 @@ import express, { Application, Request, Response } from "express";
 import { apiVersion } from "./config/constant";
 import roomRoutes from "./routes/roomRoute";
 import voiceEntryRoutes from "./routes/voiceEntryRoute";
+import gladiaRoutes from "./routes/gladiaRoutes";
 
 //routes import
 import testRoute from "./routes/testeRoute";
@@ -69,6 +70,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use(`/api/${apiVersion}`, testRoute);
 app.use(`/api/${apiVersion}/room`, roomRoutes);
 app.use(`/api/${apiVersion}/voice`, voiceEntryRoutes);
+app.use(`/api/${apiVersion}/gladia-callback`, gladiaRoutes);
 
 // Middleware de gestion des erreurs
 app.use(errorHandler);

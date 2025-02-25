@@ -43,75 +43,53 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transcribeAudio = void 0;
+// src/services/voiceEntryService/voiceEntryTranscriptionService.ts
 const axios_1 = __importStar(require("axios"));
 const helper_1 = require("../../utils/helper");
+const CustomError_1 = require("../../utils/CustomError");
 const env_1 = require("../../config/env");
-/**
- * Effectue un polling pour récupérer le résultat de la transcription.
- * @param resultUrl L'URL pour récupérer le résultat.
- * @param headers Les headers à utiliser pour la requête.
- * @returns La transcription complète.
- */
-function pollForResult(resultUrl, headers) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const maxRetries = 20;
-        const pollInterval = 3000; // 3 secondes
-        for (let i = 0; i < maxRetries; i++) {
-            console.log(`Polling for results... (tentative ${i + 1})`);
-            const pollResponse = (yield axios_1.default.get(resultUrl, { headers })).data;
-            if (pollResponse.status === "done") {
-                console.log("- Transcription done.");
-                // On suppose que la transcription se trouve dans result.transcription.full_transcript
-                return pollResponse.result.transcription.full_transcript.trim();
-            }
-            else if (pollResponse.status === "failed") {
-                throw new Error("Transcription process failed.");
-            }
-            // Attendre pollInterval avant de refaire une tentative
-            yield new Promise((resolve) => setTimeout(resolve, pollInterval));
-        }
-        throw new Error("Transcription not completed within the expected time.");
-    });
-}
 const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
-    console.log("env", env_1.env);
     const fileUrl = (0, helper_1.generateFileUrl)(filePath);
-    console.log("File URL for transcription:", fileUrl);
+    if (!fileUrl) {
+        throw new CustomError_1.BadRequestError("Invalid file path. Please provide a valid file path.");
+    }
     try {
+        // Préparez le payload avec le callback activé
         const requestData = {
             audio_url: fileUrl,
-            diarization: true,
+            callback: true,
+            callback_config: {
+                url: env_1.env.GLADIA_CALLBACK_URL,
+                method: "POST",
+            },
+            diarization: false,
             language: "fr",
             translation_config: {
                 target_languages: ["fr"],
-                model: "base",
-                match_original_utterances: true
-            }
+            },
         };
         const headers = {
             "Content-Type": "application/json",
             "x-gladia-key": env_1.env.GLADIA_API_KEY,
         };
-        console.log("- Sending initial transcription request to Gladia API...");
-        const initialResponse = (yield axios_1.default.post(`${env_1.env.GLADIA_TRANSCRIPTION_URL}`, requestData, { headers })).data;
+        console.log("- Sending transcription request to Gladia API with callback...");
+        const initialResponse = (yield axios_1.default.post(env_1.env.GLADIA_TRANSCRIPTION_URL, requestData, { headers })).data;
         console.log("- Initial response:", initialResponse);
-        const resultUrl = initialResponse.result_url;
-        if (!resultUrl) {
-            throw new Error("No result_url returned from Gladia API.");
+        // Ici, au lieu de faire du polling, on renvoie un message indiquant que la transcription est en cours.
+        if (!initialResponse || !initialResponse.id) {
+            throw new CustomError_1.InternalServerError("Failed to initiate transcription with Gladia API.");
         }
-        // Effectuer un polling pour récupérer le résultat de la transcription
-        const transcriptionResult = yield pollForResult(resultUrl, headers);
-        return transcriptionResult;
+        return "Transcription queued. You will be notified via callback once completed.";
     }
     catch (error) {
         if (error instanceof axios_1.AxiosError) {
             console.error(`AxiosError on ${(_a = error.config) === null || _a === void 0 ? void 0 : _a.url}: ${error.message}\nResponse: ${JSON.stringify((_b = error.response) === null || _b === void 0 ? void 0 : _b.data)}`);
         }
         else {
-            console.error("Error during transcription:", error);
+            console.error("Error during transcription request:", error);
         }
-        throw error;
+        throw new CustomError_1.InternalServerError("Something went wrong while processing the audio transcription.");
     }
 });
 exports.transcribeAudio = transcribeAudio;

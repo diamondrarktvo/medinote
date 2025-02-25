@@ -26,6 +26,7 @@ export const env = {
   GLADIA_API_KEY: process.env.GLADIA_API_KEY,
   GLADIA_UPLOAD_URL: process.env.GLADIA_UPLOAD_URL,
   GLADIA_TRANSCRIPTION_URL: process.env.GLADIA_TRANSCRIPTION_URL,
+  GLADIA_CALLBACK_URL: process.env.GLADIA_CALLBACK_URL,
 };
 
 /*
@@ -46,4 +47,5 @@ GITHUB_TOKEN="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"
 GLADIA_API_KEY="cffddd86-a972-4747-bda9-d349d7bdde34"
 GLADIA_UPLOAD_URL="https://api.gladia.io/v2/upload"
 GLADIA_TRANSCRIPTION_URL="https://api.gladia.io/v2/pre-recorded"
+GLADIA_CALLBACK_URL="https://back-medinote.onrender.com/api/v1/gladia-callback"
 */
