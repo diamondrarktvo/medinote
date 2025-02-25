@@ -75,7 +75,15 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
             content_type: contentType,
           },
           roomId: room_id,
-        }).unwrap();
+        })
+          .unwrap()
+          .then(() => {
+            Helpers.showToast("success", "Vocale transcrit avec succès.");
+          })
+          .catch((err) => {
+            console.error(err);
+            Helpers.showToast("error", "Failed to send recording.");
+          });
       }
     } else {
       await startRecording();
