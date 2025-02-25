@@ -75,9 +75,7 @@ function pollForResult(resultUrl, headers) {
 }
 const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
-    console.log("env", env_1.env);
     const fileUrl = (0, helper_1.generateFileUrl)(filePath);
-    console.log("File URL for transcription:", fileUrl);
     try {
         const requestData = {
             audio_url: fileUrl,
