@@ -10,12 +10,11 @@ export const getFilePath = (fileName: string): string => {
 
 export const generateFileUrl = (filePath: string): string => {
   const baseUrl = env.BASE_URL;
-  // Recherche l'indice de "uploads" dans le chemin complet
+
   const uploadsIndex = filePath.indexOf("uploads");
   let relativePath = filePath;
 
   if (uploadsIndex !== -1) {
-    // Extrait le chemin relatif à partir de "uploads"
     relativePath = filePath.substring(uploadsIndex);
   } else {
     relativePath = path.relative(process.cwd(), filePath);
