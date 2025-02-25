@@ -1,11 +1,10 @@
-// src/controllers/voiceEntryController.ts
-
 import fs from "fs";
 import { Request, Response, NextFunction } from "express";
 import { Room } from "../entities/Room";
 import * as voiceEntryService from "../services/voiceEntryService";
 import { AppDataSource } from "../config/data-source";
 import { getFilePath, generateFileUrl } from "../utils/helper";
+import { BadRequestError, NotFoundError } from "../utils/CustomError";
 
 export const createVoiceEntryController = async (
   req: Request,
@@ -14,52 +13,39 @@ export const createVoiceEntryController = async (
 ) => {
   try {
     if (!req.file) {
-      return res
-        .status(400)
-        .json({ success: false, message: "No file uploaded" });
+      throw new BadRequestError(
+        "No audio file provided. Please provide an audio file for transcription.",
+      );
     }
 
     const { room_id } = req.body;
-
     if (!room_id) {
-      return res
-        .status(400)
-        .json({ success: false, message: "room_id is required" });
+      throw new BadRequestError("room_id is required.");
     }
 
     const roomRepository = AppDataSource.getRepository(Room);
-
     const room = await roomRepository.findOne({
       where: { id: room_id },
     });
 
     if (!room) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Room not found" });
+      throw new NotFoundError("Room not found.");
     }
 
-    console.log("debut du travail");
-    // Transcription de l'audio
+    console.log("Début du traitement");
+
     const transcription = await voiceEntryService.transcribeAudio(
       req.file.path,
     );
+    console.log("Transcription:", transcription);
 
-    console.log("transcription", transcription);
-
-    // Résumé de la transcription
     const summary = await voiceEntryService.summarizeText(transcription);
+    console.log("Résumé:", summary);
 
-    console.log("summary", summary);
-
-    // Chiffrement du fichier audio
     const encryptedFilePath = await voiceEntryService.encryptFile(
       req.file.path,
     );
 
-    console.log("encryptedFilePath", encryptedFilePath);
-
-    // save voice entry
     const voiceEntrySaved = await voiceEntryService.createVoiceEntry({
       transcription,
       summary,
@@ -84,29 +70,22 @@ export const getVoiceEntryByRoomId = async (
 ) => {
   try {
     const roomId = parseInt(req.query.room_id as string);
-
     if (isNaN(roomId)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid room_id",
-      });
+      throw new BadRequestError("Invalid room_id.");
     }
 
-    // Récupérer les VoiceEntry associés au room_id
     const voiceEntries =
       await voiceEntryService.getVoiceEntriesByRoomId(roomId);
 
-    // Décrypter les fichiers et mettre à jour recording_url
     const updatedVoiceEntries = await Promise.all(
       voiceEntries.map(async (entry) => {
-        const encryptedFilePath = getFilePath(entry.recording_url); // Chemin complet du fichier chiffré
-
+        const encryptedFilePath = getFilePath(entry.recording_url);
         const decryptedFilePath =
-          await voiceEntryService.decryptFile(encryptedFilePath); // Chemin relatif du fichier déchiffré
+          await voiceEntryService.decryptFile(encryptedFilePath);
 
         return {
           ...entry,
-          recording_url: generateFileUrl(decryptedFilePath), // Mettre à jour recording_url avec le chemin relatif du fichier déchiffré
+          recording_url: generateFileUrl(decryptedFilePath),
         };
       }),
     );

@@ -1,4 +1,9 @@
 import { ErrorRequestHandler } from "express";
+import {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../utils/CustomError";
 
 export const errorHandler: ErrorRequestHandler = (
   err,
@@ -13,7 +18,31 @@ export const errorHandler: ErrorRequestHandler = (
       success: false,
       message: err.message,
     });
-    return; // retourne undefined, conforme au type void
+    return;
+  }
+
+  if (err instanceof BadRequestError) {
+    res.status(400).json({
+      success: false,
+      message: err.message,
+    });
+    return;
+  }
+
+  if (err instanceof NotFoundError) {
+    res.status(404).json({
+      success: false,
+      message: err.message,
+    });
+    return;
+  }
+
+  if (err instanceof InternalServerError) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+    return;
   }
 
   res.status(500).json({
