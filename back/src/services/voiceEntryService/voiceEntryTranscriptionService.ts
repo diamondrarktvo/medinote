@@ -31,9 +31,7 @@ async function pollForResult(
 }
 
 export const transcribeAudio = async (filePath: string): Promise<string> => {
-  console.log("env", env);
   const fileUrl = generateFileUrl(filePath);
-  console.log("File URL for transcription:", fileUrl);
   try {
     const requestData = {
       audio_url: fileUrl,
