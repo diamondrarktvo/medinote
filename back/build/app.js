@@ -9,7 +9,6 @@ const express_1 = __importDefault(require("express"));
 const constant_1 = require("./config/constant");
 const roomRoute_1 = __importDefault(require("./routes/roomRoute"));
 const voiceEntryRoute_1 = __importDefault(require("./routes/voiceEntryRoute"));
-const gladiaRoutes_1 = __importDefault(require("./routes/gladiaRoutes"));
 //routes import
 const testeRoute_1 = __importDefault(require("./routes/testeRoute"));
 //middlewares import
@@ -60,7 +59,6 @@ app.get("/", (req, res) => {
 app.use(`/api/${constant_1.apiVersion}`, testeRoute_1.default);
 app.use(`/api/${constant_1.apiVersion}/room`, roomRoute_1.default);
 app.use(`/api/${constant_1.apiVersion}/voice`, voiceEntryRoute_1.default);
-app.use(`/api/${constant_1.apiVersion}/gladia-callback`, gladiaRoutes_1.default);
 // Middleware de gestion des erreurs
 app.use(errorHandler_1.errorHandler);
 exports.default = app;
