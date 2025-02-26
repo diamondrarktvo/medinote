@@ -82,6 +82,7 @@ const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function
             audio_url: fileUrl,
             diarization: false,
             language: "fr",
+            detect_language: false,
             translation_config: {
                 target_languages: ["fr"],
                 model: "base",
