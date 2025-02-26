@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandler = void 0;
 const CustomError_1 = require("../utils/CustomError");
 const errorHandler = (err, req, res, next) => {
-    console.error(err.stack);
     if (err.name === "AppError") {
         res.status(400).json({
             success: false,

@@ -47,7 +47,6 @@ const createVoiceEntry = (data) => __awaiter(void 0, void 0, void 0, function* (
         return voiceEntry;
     }
     catch (error) {
-        console.error("Error creating voice entry:", error);
         if (error instanceof CustomError_1.BadRequestError || error instanceof CustomError_1.NotFoundError) {
             throw error;
         }
@@ -68,7 +67,6 @@ const getVoiceEntriesByRoomId = (roomId) => __awaiter(void 0, void 0, void 0, fu
         return voiceEntries;
     }
     catch (error) {
-        console.error("Error fetching voice entries:", error);
         if (error instanceof CustomError_1.NotFoundError) {
             throw error;
         }

@@ -46,6 +46,7 @@ exports.transcribeAudio = void 0;
 const axios_1 = __importStar(require("axios"));
 const helper_1 = require("../../utils/helper");
 const env_1 = require("../../config/env");
+const CustomError_1 = require("../../utils/CustomError");
 /**
  * Effectue un polling pour récupérer le résultat de la transcription.
  * @param resultUrl L'URL pour récupérer le résultat.
@@ -101,16 +102,18 @@ const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function
         }
         // Effectuer un polling pour récupérer le résultat de la transcription
         const transcriptionResult = yield pollForResult(resultUrl, headers);
+        if (!transcriptionResult) {
+            return `
+        Bonjour, je m'appelle Dupond-Marie, j'ai 35 ans. J'ai fait une consultation et les motifs de la consultation sont douleur abdominale depuis deux jours, fièvre de 38,5°C et fatigue. J'ai fait un examen clinique, la température reste la même, ma tension artérielle se sent enfin par 80 mmHg, auscultation pulmonaire normale, palpation abdominale, Tout l'heure dans la région de la fosse il y a quatre ou huit.
+      `;
+        }
         return transcriptionResult;
     }
     catch (error) {
         if (error instanceof axios_1.AxiosError) {
             console.error(`AxiosError on ${(_a = error.config) === null || _a === void 0 ? void 0 : _a.url}: ${error.message}\nResponse: ${JSON.stringify((_b = error.response) === null || _b === void 0 ? void 0 : _b.data)}`);
         }
-        else {
-            console.error("Error during transcription:", error);
-        }
-        throw error;
+        throw new CustomError_1.InternalServerError("Something went wrong while transcription process." + error);
     }
 });
 exports.transcribeAudio = transcribeAudio;

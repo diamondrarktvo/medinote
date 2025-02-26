@@ -31,7 +31,7 @@ const encryptFile = (filePath) => __awaiter(void 0, void 0, void 0, function* ()
             // Delete the original file after encryption
             fs_1.default.unlink(filePath, (err) => {
                 if (err) {
-                    console.error("Failed to delete original file:", err);
+                    console.log("Failed to delete original file:", err);
                 }
                 else {
                     console.log("Original file deleted successfully");
