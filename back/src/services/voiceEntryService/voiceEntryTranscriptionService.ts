@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { generateFileUrl } from "../../utils/helper";
 import { env } from "../../config/env";
+import { InternalServerError } from "../../utils/CustomError";
 
 /**
  * Effectue un polling pour récupérer le résultat de la transcription.
@@ -77,9 +78,9 @@ export const transcribeAudio = async (filePath: string): Promise<string> => {
       console.error(
         `AxiosError on ${error.config?.url}: ${error.message}\nResponse: ${JSON.stringify(error.response?.data)}`,
       );
-    } else {
-      console.error("Error during transcription:", error);
     }
-    throw error;
-  }
+    throw new InternalServerError(
+      "Something went wrong while transcription process." + error,
+    );
+}
 };

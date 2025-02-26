@@ -21,7 +21,7 @@ export const encryptFile = async (filePath: string): Promise<string> => {
       // Delete the original file after encryption
       fs.unlink(filePath, (err) => {
         if (err) {
-          console.error("Failed to delete original file:", err);
+          console.log("Failed to delete original file:", err);
         } else {
           console.log("Original file deleted successfully");
         }

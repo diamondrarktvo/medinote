@@ -60,15 +60,12 @@ export const summarizeText = async (transcription: string): Promise<string> => {
 
     return response.data.choices[0].message.content.trim();
   } catch (error: any) {
-    console.error(
-      "Error generating summary:",
-      error.response?.data || error.message,
-    );
+    
     if (error instanceof BadRequestError || error instanceof NotFoundError) {
       throw error;
     }
     throw new InternalServerError(
-      "Something went wrong while generating the summary.",
+      error.response?.data || error.message || "Something went wrong while generating the summary.",
     );
   }
 };

@@ -11,7 +11,6 @@ router.get("/test-connection", async (req: Request, res: Response) => {
       message: "Connection succes",
     });
   } catch (error) {
-    console.error("Connection error:", error);
     res.status(500).json({ success: false, error });
   }
 });

@@ -54,7 +54,6 @@ export const createVoiceEntry = async (data: {
     await voiceEntryRepository.save(voiceEntry);
     return voiceEntry;
   } catch (error) {
-    console.error("Error creating voice entry:", error);
 
     if (error instanceof BadRequestError || error instanceof NotFoundError) {
       throw error;
@@ -81,8 +80,6 @@ export const getVoiceEntriesByRoomId = async (roomId: number) => {
 
     return voiceEntries;
   } catch (error) {
-    console.error("Error fetching voice entries:", error);
-
     if (error instanceof NotFoundError) {
       throw error;
     }

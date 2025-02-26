@@ -11,7 +11,6 @@ export const errorHandler: ErrorRequestHandler = (
   res,
   next,
 ): void => {
-  console.error(err.stack);
 
   if (err.name === "AppError") {
     res.status(400).json({
