@@ -38,6 +38,7 @@ export const transcribeAudio = async (filePath: string): Promise<string> => {
       audio_url: fileUrl,
       diarization: false,
       language: "fr",
+      detect_language: false,
       translation_config: {
         target_languages: ["fr"],
         model: "base",

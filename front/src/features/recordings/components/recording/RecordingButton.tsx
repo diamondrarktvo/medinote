@@ -101,6 +101,7 @@ const VoiceRecorder: React.FC<{ room_id: number }> = ({ room_id }) => {
   return (
     <Box style={styles.container}>
       <Button
+        loading={isLoading}
         variant="primary"
         label={isRecording ? "Stop Recording" : "Start Recording"}
         onPress={handleRecordPress}
