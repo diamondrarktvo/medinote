@@ -104,7 +104,7 @@ const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function
         const transcriptionResult = yield pollForResult(resultUrl, headers);
         if (!transcriptionResult) {
             return `
-        Bonjour, je m'appelle Dupond-Marie, j'ai 35 ans. J'ai fait une consultation et les motifs de la consultation sont douleur abdominale depuis deux jours, fièvre de 38,5°C et fatigue. J'ai fait un examen clinique, la température reste la même, ma tension artérielle se sent enfin par 80 mmHg, auscultation pulmonaire normale, palpation abdominale, Tout l'heure dans la région de la fosse il y a quatre ou huit.
+        Bonjour, je m'appelle Richard, j'ai 35 ans. J'ai fait une consultation et les motifs de la consultation sont douleur abdominale depuis deux jours, fièvre de 38,5°C et fatigue. J'ai fait un examen clinique, la température reste la même, ma tension artérielle se sent enfin par 80 mmHg, auscultation pulmonaire normale, palpation abdominale, Tout l'heure dans la région de la fosse il y a quatre ou huit.
       `;
         }
         return transcriptionResult;
