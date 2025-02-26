@@ -83,10 +83,12 @@ const transcribeAudio = (filePath) => __awaiter(void 0, void 0, void 0, function
             diarization: false,
             language: "fr",
             detect_language: false,
+            sentences: true,
             translation_config: {
                 target_languages: ["fr"],
                 model: "base",
             },
+            punctuation_enhanced: true,
         };
         const headers = {
             "Content-Type": "application/json",

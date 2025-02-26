@@ -39,10 +39,12 @@ export const transcribeAudio = async (filePath: string): Promise<string> => {
       diarization: false,
       language: "fr",
       detect_language: false,
+      sentences: true,
       translation_config: {
         target_languages: ["fr"],
         model: "base",
       },
+      punctuation_enhanced: true,
     };
 
     const headers = {
