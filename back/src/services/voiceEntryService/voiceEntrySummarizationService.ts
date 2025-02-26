@@ -13,19 +13,26 @@ export const summarizeText = async (transcription: string): Promise<string> => {
     );
   }
 
-  const prompt = `Please generate a structured summary, in french, for the following medical transcription. The summary should be divided into three sections: "Anamnèse", "Diagnostic", and "Traitement". Here is the transcription: "${transcription}"`;
+  const systemPrompt = `
+    Vous êtes un assistant médical spécialisé dans l'analyse de transcriptions. 
+    Votre rôle est de produire un résumé en français, structuré en trois parties (Anamnèse, Diagnostic, Traitement), 
+    en allant au-delà de la simple répétition du texte source. 
+    Vous devez proposer une interprétation médicale cohérente, formuler des hypothèses diagnostiques et 
+    indiquer un plan de traitement possible, comme le ferait un professionnel de la santé.
+  `;
+
+  const userPrompt = `Veuillez analyser la transcription suivante: "${transcription}"`;
 
   const requestBody = {
     model: "gpt-4o-mini",
     messages: [
       {
         role: "system",
-        content:
-          "You are a helpful medical assistant that provides structured summaries from transcriptions or text.",
+        content: systemPrompt,
       },
       {
         role: "user",
-        content: prompt,
+        content: userPrompt,
       },
     ],
     temperature: 0.7,
@@ -43,7 +50,7 @@ export const summarizeText = async (transcription: string): Promise<string> => {
 
     if (!response.data.choices || !response.data.choices[0].message?.content) {
       const summary = `
-        Anamnèse : Le patient se présente avec une fatigue persistante depuis 3 semaines, accompagnée de douleurs musculaires, de maux de tête et de vertiges occasionnels. Il signale également des difficultés de concentration. Les symptômes sont apparus progressivement et ne sont pas liés à un événement particulier. Le patient mentionne un niveau de stress élevé au travail ces derniers temps.
+        Anamnèse : Le patient Richard se présente avec une fatigue persistante depuis 3 semaines, accompagnée de douleurs musculaires, de maux de tête et de vertiges occasionnels. Il signale également des difficultés de concentration. Les symptômes sont apparus progressivement et ne sont pas liés à un événement particulier. Le patient mentionne un niveau de stress élevé au travail ces derniers temps.
 
         Diagnostic : Compte tenu des symptômes rapportés, il est recommandé de réaliser des examens complémentaires (bilan sanguin, etc.) afin d'explorer les causes possibles de la fatigue et des autres symptômes. Le diagnostic différentiel inclut : fatigue chronique, troubles thyroïdiens, carences nutritionnelles, stress, etc.
 
