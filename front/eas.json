@@ -9,6 +9,9 @@
       "distribution": "internal"
     },
     "preview": {
+      "env": {
+        "EXPO_PUBLIC_API_HOST_URL":"https://api.ceveo-app.fr"
+      },
       "android": {
         "buildType": "apk"
       }
