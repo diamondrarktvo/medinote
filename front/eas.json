@@ -10,7 +10,7 @@
     },
     "preview": {
       "env": {
-        "EXPO_PUBLIC_API_HOST_URL":"https://api.ceveo-app.fr"
+        "EXPO_PUBLIC_API_HOST_URL": "https://back-medinote.onrender.com"
       },
       "android": {
         "buildType": "apk"
