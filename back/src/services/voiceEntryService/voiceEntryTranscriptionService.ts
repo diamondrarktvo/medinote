@@ -20,7 +20,7 @@ async function pollForResult(
     const pollResponse = (await axios.get(resultUrl, { headers })).data;
     if (pollResponse.status === "done") {
       console.log("- Transcription done.");
-      // On suppose que la transcription se trouve dans result.transcription.full_transcript
+      //La transcription se trouve dans result.transcription.full_transcript
       return pollResponse.result.transcription.full_transcript.trim();
     } else if (pollResponse.status === "failed") {
       throw new Error("Transcription process failed.");
