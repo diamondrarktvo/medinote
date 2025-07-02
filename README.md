@@ -32,7 +32,7 @@
   - ❌ Suppression du fichier en clair après chiffrement.
 
 📝 **Traitement de l’audio** :
-  - 🔊 **Transcription simulée** : Génération d’un texte fictif.  
+  - 🔊 **Transcription** : Génération d’un texte.  
   - 🤖 **Résumé structuré via IA (simulée)** : Catégorisation en **anamnèse, diagnostic, traitement**.
 
 📤 **Réponse JSON** :
